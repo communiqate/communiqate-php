@@ -111,6 +111,8 @@ Use `ChannelType::Messenger` and a page-scoped user ID for Messenger. Both socia
 
 ## API resources
 
+See the [Workspaces API reference](https://api.communiqate.nl/docs/workspaces-api/v1) for endpoint details.
+
 | Client accessor | Methods | Scope family |
 | --- | --- | --- |
 | `channels()` | `list`, `iterate`, `get` | `channels:read` |
@@ -194,27 +196,3 @@ services:
 ```
 
 Application services that only send messages can depend on `MessageSender`. To override HTTP, pass a `CommuniQate\Workspaces\Http\Transport` to the `http` constructor argument. A PSR-18 client is also supported when `guzzlehttp/psr7` is installed. The default cURL transport uses a ten-second connection timeout and a 30-second total timeout.
-
-## Tests and API coverage
-
-Run `composer install`, `composer validate --strict` and `composer test` in this repository. Tests exercise all resource operations and their direct client equivalents without workspace credentials. To check for API changes, export the current JSON document from the authenticated workspace reference to a location outside the repository and run the following command. It reports missing or obsolete HTTP operations and webhook events. [Workspaces API reference](https://api.communiqate.nl/docs/workspaces-api/v1)
-
-```sh
-php tools/check-api.php /path/to/openapi.json
-```
-
-## Releases
-
-Use a Conventional Commit title for the squash merge into `main`. A `fix:` proposes a patch, a `feat:` a minor release, and a breaking change (for example `feat!:` with a migration note) a major release. After the test matrix passes, Release Please opens or updates a release PR with the next version and the English changelog. Merging that PR publishes the `vX.Y.Z` Git tag and GitHub Release after CI. Each package is versioned independently. [Release Please](https://github.com/googleapis/release-please-action)
-
-### First release on Packagist
-
-1. Merge the SDK implementation, including its `composer.json`, into `main` with a `feat:` commit.
-2. Register `https://github.com/communiqate/communiqate-php` on Packagist and enable automatic updates through the GitHub hook. This is a one-time setup. [Submit a package](https://packagist.org/packages/submit) · [GitHub hook setup](https://packagist.org/about#how-to-update-packages)
-3. Merge the first release PR to publish the `v0.1.0` tag. Check that the version appears on the [Packagist package page](https://packagist.org/packages/communiqate/communiqate-php).
-
-### GitHub Actions settings
-
-Enable GitHub Actions and allow it to create pull requests. If your branch rules require CI on bot-created PRs without manual approval, set a repository-scoped `RELEASE_PLEASE_TOKEN` with contents, pull request and issue write access. The workflow otherwise uses the repository token.
-
-For automatic publication after an ordinary package PR merges, enable **Allow auto-merge** and **Allow squash merging** in GitHub, require the matrix checks on `main`, set `RELEASE_PLEASE_TOKEN`, and set the Actions variable `AUTO_MERGE_RELEASE_PRS=true`. The workflow enables auto-merge on its generated release PR. Required checks and reviews still apply. With the variable unset, a maintainer merges the release PR when ready.
