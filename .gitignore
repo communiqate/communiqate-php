@@ -1,0 +1,33 @@
+# Composer and local dependencies
+/vendor/
+/composer.lock
+/auth.json
+/node_modules/
+
+# IDEs and editors
+.idea/
+.vscode/
+.fleet/
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local environment overrides
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.dist
+
+# Test reports, local configuration and tool caches
+/phpunit.xml
+/.phpunit.cache/
+/.phpunit.result.cache
+/coverage/
+/.phpstan.cache/
+/.php-cs-fixer.cache
+/.php-cs-fixer.php

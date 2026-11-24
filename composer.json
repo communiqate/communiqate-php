@@ -1,0 +1,35 @@
+{
+    "name": "communiqate/communiqate-php",
+    "description": "Framework-independent PHP SDK for the CommuniQate Workspaces API and webhooks.",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.3 <8.7",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5 || ^12.5 || ^13.0",
+        "guzzlehttp/guzzle": "^7.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "CommuniQate\\Workspaces\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
+        }
+    },
+    "scripts": {
+        "test": "phpunit tests"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "suggest": {
+        "guzzlehttp/psr7": "PSR-7 requests for the optional PSR-18 transport."
+    }
+}
