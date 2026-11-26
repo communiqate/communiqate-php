@@ -41,7 +41,7 @@ HTTP 201 means CommuniQate accepted the message. The result includes the message
 
 ### Record a conversion event
 
-Configure an event such as `order_placed` in the workspace's API & webhooks settings. Supply its key, an existing CommuniQate contact ID and a stable ID for this occurrence. A published, active automation can start on the event and use its properties.
+Configure an event such as `order_placed` under **Insights → Events**. Supply its key, an existing CommuniQate contact ID and a stable ID for this occurrence. A published, active automation can start on the event and use its properties.
 
 ```php
 $result = $api->events()->record([
