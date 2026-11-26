@@ -1,6 +1,6 @@
 # CommuniQate Workspaces SDK for PHP
 
-Send email and WhatsApp messages, reply on Instagram or Messenger, manage workspace resources and verify incoming webhooks. The SDK covers all 38 operations of the public Workspaces v1 API. For Blade Mailables, Laravel Notifications and a facade, install the [Laravel integration](https://github.com/communiqate/communiqate-laravel).
+Send email and WhatsApp messages, reply on Instagram or Messenger, manage workspace resources and verify incoming webhooks. The SDK covers all 39 operations of the public Workspaces v1 API. For Blade Mailables, Laravel Notifications and a facade, install the [Laravel integration](https://github.com/communiqate/communiqate-laravel).
 
 ## Installation
 
@@ -38,6 +38,22 @@ $messageId = $accepted['message_id'];
 ```
 
 HTTP 201 means CommuniQate accepted the message. The result includes the message, conversation, contact and channel IDs. Follow delivery through `messages.status_updated` or call `$api->messages()->get($conversationId, $messageId)`.
+
+### Record a conversion event
+
+Configure an event such as `order_placed` in the workspace's API & webhooks settings. Supply its key, an existing CommuniQate contact ID and a stable ID for this occurrence. A published, active automation can start on the event and use its properties.
+
+```php
+$result = $api->events()->record([
+    'key' => 'order_placed',
+    'contact_id' => $contactId,
+    'external_id' => 'order-'.$orderId,
+    'properties' => ['amount' => 39.95, 'currency' => 'EUR'],
+]);
+$eventId = $result['data']['id'];
+```
+
+Use the same external ID and payload on retries. The API returns the original event ID for a duplicate and HTTP 409 for conflicting data. In Laravel, the existing `CommuniQate\Laravel\Facades\CommuniQate::events()->record(...)` facade call uses the configured workspace.
 
 ### Build for a workspace and channel
 
@@ -115,6 +131,7 @@ See the [Workspaces API reference](https://api.communiqate.nl/docs/workspaces-ap
 
 | Client accessor | Methods | Scope family |
 | --- | --- | --- |
+| `events()` | `record` | `events:write` |
 | `channels()` | `list`, `iterate`, `get` | `channels:read` |
 | `contacts()` | `list`, `iterate`, `get`, `create`, `update`, `setMetaField`, `addToList`, `removeFromList` | `contacts:read/write` |
 | `conversations()` | `list`, `iterate`, `get`, `start`, `update` | `conversations:read/write` |

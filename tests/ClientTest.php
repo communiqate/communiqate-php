@@ -55,6 +55,7 @@ final class ClientTest extends TestCase
             $args['filename'] = 'example.txt';
         } else {
             $body = match ($operation) {
+                'recordConversionEvent' => ['key' => 'order_placed', 'contact_id' => self::WORKSPACE_ID, 'external_id' => 'order-1945', 'properties' => ['amount' => 39.95]],
                 'sendMessage' => ['channel_id' => 'channel', 'to' => '+31600000000', 'type' => 'text', 'text' => 'hello'],
                 'startConversation' => ['channel_id' => 'channel', 'identifier' => '+31600000000', 'message' => ['type' => 'text', 'text' => 'hello']],
                 'putContactMetaFieldValue' => ['value' => null],

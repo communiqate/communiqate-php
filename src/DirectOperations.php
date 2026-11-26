@@ -7,6 +7,11 @@ namespace CommuniQate\Workspaces;
 /** Flat operationId methods retained for existing applications. */
 trait DirectOperations
 {
+    public function recordConversionEvent(#[\SensitiveParameter] array $body, ?string $idempotencyKey = null): array
+    {
+        return $this->events()->record($body, $idempotencyKey);
+    }
+
     public function listChannels(array $query = []): array
     {
         return $this->channels()->list($query);
