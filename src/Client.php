@@ -11,6 +11,7 @@ use CommuniQate\Workspaces\Resources\Channels;
 use CommuniQate\Workspaces\Resources\Contacts;
 use CommuniQate\Workspaces\Resources\Conversations;
 use CommuniQate\Workspaces\Resources\EmailTemplates;
+use CommuniQate\Workspaces\Resources\Events;
 use CommuniQate\Workspaces\Resources\Files;
 use CommuniQate\Workspaces\Resources\Messages;
 use CommuniQate\Workspaces\Resources\MetaFields;
@@ -67,6 +68,11 @@ final class Client implements MessageSender
     public function emailTemplates(): EmailTemplates
     {
         return new EmailTemplates($this->connection);
+    }
+
+    public function events(): Events
+    {
+        return new Events($this->connection);
     }
 
     public function files(): Files

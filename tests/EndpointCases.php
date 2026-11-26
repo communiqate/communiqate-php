@@ -9,6 +9,7 @@ final class EndpointCases
     public static function all(): array
     {
         return [
+            'recordConversionEvent' => ['events', 'record', 'POST', '/{workspace}/events', 201],
             'listChannels' => ['channels', 'list', 'GET', '/{workspace}/channels', 200],
             'showChannel' => ['channels', 'get', 'GET', '/{workspace}/channels/{channel}', 200],
             'listContacts' => ['contacts', 'list', 'GET', '/{workspace}/contacts', 200],
